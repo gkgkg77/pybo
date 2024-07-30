@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <div class="container my-5">
+       <div class="card">
+            <div class="card-body">
+                 <h4 style="text-align: center;">基本情報</h4>
+                    <!-- message 표시 -->
+                 {% if messages %}
+                     <div class="alert alert-danger my-3" role="alert">
+                          {% for message in messages %}
+                          <strong>{{ message.tags }}</strong>
+                          <ul><li>{{ message.message }}</li></ul>
+                          {% endfor %}
+                     </div>
+                 {% endif %}
+                        <!-- 질문 -->
+                     <div class="row" style="margin-top:30px;">
+                          <div class="col-1"></div>
+                          <div class="col-2" style="text-align: center; font-weight: bold;">
+                               <label>タイトル</label>
+                          </div>
+                          <div class="col-1"></div>
+                          <div class="col-7">
+                               <label>{{ question.subject }}</label>
+                          </div>
+                     </div>
+                     <div class="row" style="margin-top:30px;">
+                          <div class="col-1"></div>
+                          <div class="col-2" style="text-align: center; font-weight: bold;">
+                               <label>公開方式</label>
+                          </div>
+                          <div class="col-1"></div>
+                          <div class="col-7">
+                               <label>{{ question.get_public_display }}</label>
+                          </div>
+                     </div>
+                     <div class="row" style="margin-top:30px;">
+                          <div class="col-1"></div>
+                          <div class="col-2" style="text-align: center; font-weight: bold;">
+                               <label>発信日</label>
+                          </div>
+                          <div class="col-1"></div>
+                          <div class="col-7">
+                               <label>{{ question.issued_date }}</label>
+                          </div>
+                     </div>
+                     <div class="row" style="margin-top:30px;">
+                          <div class="col-1"></div>
+                          <div class="col-2" style="text-align: center; font-weight: bold;">
+                              <label>満了日</label>
+                          </div>
+                          <div class="col-1"></div>
+                          <div class="col-7">
+                               <label>{{ question.expiry_date }}</label>
+                          </div>
+                     </div>
+                     <div class="row" style="margin-top:30px;">
+                          <div class="col-1"></div>
+                          <div class="col-2" style="text-align: center; font-weight: bold;">
+                               <label>通知有無</label>
+                          </div>
+                          <div class="col-1"></div>
+                          <div class="col-7">
+                               <label>{{ question.get_push_display }}</label>
+                          </div>
+                     </div>
+                     <div class="row" style="margin-top:30px;">
+                          <div class="col-1"></div>
+                          <div class="col-2" style="text-align: center; font-weight: bold;">
+                               <label>内容</label>
+                          </div>
+                          <div class="col-1"></div>
+                          <div class="col-7">
+                               <label>{{ question.content }}</label>
+                          </div>
+                     </div>
+            </div>
+       </div>
+       <div class="my-3" style="text-align: center;">
+             {% if request.user == question.author %}
+             <a href="{% url 'pybo:index' %}"
+             class="btn btn-primary" style="margin-top:30px;">お知らせ一覧</a>
+            {% endif %}
+       </div>
+    </div>
+    {% endblock %}
+
+</body>
